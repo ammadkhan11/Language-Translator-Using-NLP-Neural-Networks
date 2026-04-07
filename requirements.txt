@@ -4,3 +4,4 @@ streamlit
 pyngrok
 pandas
 numpy
+torch
