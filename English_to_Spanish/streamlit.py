@@ -13,7 +13,6 @@ SP_TOKENIZER_PATH = "English_to_Spanish/sp_tokenizer.pkl"
 
 # --- Load the model and tokenizers ---
 @st.cache_resource
-import os
 import streamlit as st
 from tensorflow.keras.models import load_model
 
