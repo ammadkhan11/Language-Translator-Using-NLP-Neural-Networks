@@ -5,3 +5,9 @@ pyngrok
 pandas
 numpy
 torch
+transformers==5.0.0
+datasets==4.0.0
+sacremoses==0.1.1
+accelerate==1.13.0
+pandas==2.2.2
+torch==2.10.0+cpu
