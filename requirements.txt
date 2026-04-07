@@ -4,7 +4,6 @@ streamlit
 pyngrok
 pandas
 numpy
-torch
 transformers==5.0.0
 datasets==4.0.0
 sacremoses==0.1.1
