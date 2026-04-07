@@ -7,9 +7,9 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # --- Paths to your saved files (adjust if necessary) ---
-MODEL_PATH = "model_2.keras"
-ENG_TOKENIZER_PATH = "eng_tokenizer.pkl"
-SP_TOKENIZER_PATH = "sp_tokenizer.pkl"
+MODEL_PATH = "English_to_Spanish/model_2.keras"
+ENG_TOKENIZER_PATH = "English_to_Spanish/eng_tokenizer.pkl"
+SP_TOKENIZER_PATH = "English_to_Spanish/sp_tokenizer.pkl"
 
 # --- Load the model and tokenizers ---
 @st.cache_resource
@@ -19,11 +19,15 @@ from tensorflow.keras.models import load_model
 
 @st.cache_resource
 def load_artifacts():
-    st.write("Current working dir:", os.getcwd())
-    st.write("MODEL_PATH:", MODEL_PATH)
-    st.write("Exists:", os.path.exists(MODEL_PATH))
+    model = load_model(MODEL_PATH)
+    with open(ENG_TOKENIZER_PATH, 'rb') as f:
+        eng_tokenizer = pickle.load(f)
+    with open(SP_TOKENIZER_PATH, 'rb') as f:
+        sp_tokenizer = pickle.load(f)
     
-    model = load_model(MODEL_PATH, compile=False)
+    # Create a reverse dictionary for Spanish tokenizer
+    index_to_word = {i: w for w, i in sp_tokenizer.word_index.items()}
+    
     return model, eng_tokenizer, sp_tokenizer, index_to_word
 
 model, eng_tokenizer, sp_tokenizer, index_to_word = load_artifacts()
