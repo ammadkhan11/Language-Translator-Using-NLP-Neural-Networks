@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import pickle
 from tensorflow.keras.models import load_model
-from keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
 
 
