@@ -1,5 +1,3 @@
-%%writefile streamlit_app.py
-
 import streamlit as st
 import os
 import pickle
@@ -7,7 +5,7 @@ from tensorflow.keras.models import load_model
 from keras.preprocessing.sequence import pad_sequences
 import numpy as np
 
-# --- Helper functions (copy from your notebook) ---
+
 def pad(x, length=None):
   if length is None:
       return pad_sequences(x, maxlen=40, padding = "post")
@@ -24,19 +22,15 @@ def optimized_translate_sentence(french_sentence, loaded_model, english_tokenize
     prediction_logits = loaded_model.predict(padded_sentence.reshape(1, -1))[0]
     translated_text = logits_to_text(prediction_logits, english_tokenizer)
     return translated_text
-# --- End Helper functions ---
 
-# --- Global variables for model and tokenizers ---
-# IMPORTANT: Ensure these paths are correct and accessible in your Colab environment
-# If you've mounted Google Drive, paths like '/content/drive/MyDrive/...' are correct.
-MODEL_PATH = "/content/drive/MyDrive/Colab Notebooks/UIT/model_1.h5"
-ENGLISH_TOKENIZER_PATH = "/content/drive/MyDrive/Colab Notebooks/UIT/tokenizers/english_tokenizer.pkl"
-FRENCH_TOKENIZER_PATH = "/content/drive/MyDrive/Colab Notebooks/UIT/tokenizers/french_tokenizer.pkl"
-MAX_SEQUENCE_LENGTH = 40 # Assuming this is the fixed length
+MODEL_PATH = "model_1.h5"
+ENGLISH_TOKENIZER_PATH = "english_tokenizer.pkl"
+FRENCH_TOKENIZER_PATH = "french_tokenizer.pkl"
+MAX_SEQUENCE_LENGTH = 40 
 
-@st.cache_resource # Cache the model and tokenizers to load them only once
+@st.cache_resource 
 def load_translation_resources():
-    st.write("Streamlit app: Loading model and tokenizers...") # Use st.write for Streamlit output
+    st.write("Streamlit app: Loading model and tokenizers...") 
     try:
         loaded_model = load_model(MODEL_PATH)
         with open(ENGLISH_TOKENIZER_PATH, 'rb') as f:
