@@ -13,16 +13,17 @@ SP_TOKENIZER_PATH = "sp_tokenizer.pkl"
 
 # --- Load the model and tokenizers ---
 @st.cache_resource
+import os
+import streamlit as st
+from tensorflow.keras.models import load_model
+
+@st.cache_resource
 def load_artifacts():
-    model = load_model(MODEL_PATH)
-    with open(ENG_TOKENIZER_PATH, 'rb') as f:
-        eng_tokenizer = pickle.load(f)
-    with open(SP_TOKENIZER_PATH, 'rb') as f:
-        sp_tokenizer = pickle.load(f)
+    st.write("Current working dir:", os.getcwd())
+    st.write("MODEL_PATH:", MODEL_PATH)
+    st.write("Exists:", os.path.exists(MODEL_PATH))
     
-    # Create a reverse dictionary for Spanish tokenizer
-    index_to_word = {i: w for w, i in sp_tokenizer.word_index.items()}
-    
+    model = load_model(MODEL_PATH, compile=False)
     return model, eng_tokenizer, sp_tokenizer, index_to_word
 
 model, eng_tokenizer, sp_tokenizer, index_to_word = load_artifacts()
