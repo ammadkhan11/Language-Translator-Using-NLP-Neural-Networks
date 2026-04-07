@@ -283,6 +283,3 @@ else:
         else:
             st.error("English→Spanish model or tokenizers could not be loaded.")
 
-
-st.markdown("---")
-st.caption("Built with Streamlit, TensorFlow, PyTorch, and Hugging Face Transformers.")
